@@ -1,0 +1,16 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <type>org.netbeans.modules.cnd.makeproject</type>
+  <configuration>
+    <data xmlns="http://www.netbeans.org/ns/make-project/1">
+      <name>project</name>
+      <source-roots>
+        <root id="src.dir" name="Source Files" path="."/>
+      </source-roots>
+      <test-roots>
+        <root id="test.src.dir" name="Test Files" path="."/>
+      </test-roots>
+    </data>
+  </configuration>
+</project>
