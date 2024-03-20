@@ -7,4 +7,9 @@ public class VariableBinding {
   throw new UnsupportedOperationException("Unimplemented method 'getVariable'");
  }
 
+ public String getOid() {
+  // TODO Auto-generated method stub
+  throw new UnsupportedOperationException("Unimplemented method 'getOid'");
+ }
+
 }
