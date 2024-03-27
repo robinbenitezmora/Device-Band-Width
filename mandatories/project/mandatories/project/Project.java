@@ -12,7 +12,7 @@ public class Project {
   throw new UnsupportedOperationException("Unimplemented method 'cancel'");
  }
 
- public void send(PDU pdu, CommunitiyTarget target, Object object, ResponseListener listener) {
+ public ResponseEvent send(PDU pdu, CommunitiyTarget target, Object object, ResponseListener listener) {
   // TODO Auto-generated method stub
   throw new UnsupportedOperationException("Unimplemented method 'send'");
  }
