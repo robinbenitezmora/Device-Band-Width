@@ -38,25 +38,6 @@ public class ProjectGetAsyn {
 
    final CountDownLatch latch = new CountDownLatch(1);
    ResponseListener listener = new ResponseListener() {
-    public void onResponse(ResponseEvent event) {
-     ((Project) event.getSource()).cancel(event.getRequest(), this);
-     PDU response = event.getResponse();
-     PDU request = (PDU) event.getRequest();
-     System.out.println("[request]:" + request);
-     if (response == null) {
-      System.out.println("TimeOut...");
-     } else if (response.getErrorStatus() != 0) {
-      System.out.println("[ERROR]: " + response.getErrorStatus() + " Text: " + response.getErrorStatus());
-     } else {
-      System.out.println("Received response Success!");
-      for (int i = 0; i < response.size(); i++) {
-       VariableBinding vb = response.get(i);
-       System.out.println(vb.getOid() + " = " + vb.getVariable());
-      }
-      System.out.println("Project Asyn GetList is finished...");
-      latch.countDown();
-     }
-    }
    };
 
    pdu.setType(PDU.GET);

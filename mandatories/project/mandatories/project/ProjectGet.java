@@ -43,11 +43,6 @@ public class ProjectGet {
   return response;
  }
 
- private static CommunityTarget createDefault(String ip, String community) {
-  // TODO Auto-generated method stub
-  throw new UnsupportedOperationException("Unimplemented method 'createDefault'");
- }
-
  public static long getPDUvalue(PDU response) {
   long IfInOctets = -1;
   for (int i = 0; i < response.size(); i++) {
