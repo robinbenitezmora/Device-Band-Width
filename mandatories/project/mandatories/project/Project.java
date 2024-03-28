@@ -22,4 +22,14 @@ public class Project {
   throw new UnsupportedOperationException("Unimplemented method 'close'");
  }
 
+ public Object getMessageDispatcher() {
+  // TODO Auto-generated method stub
+  throw new UnsupportedOperationException("Unimplemented method 'getMessageDispatcher'");
+ }
+
+ public void addCommandResponder(ProjectTrapMultiThreadReceiver projectTrapMultiThreadReceiver) {
+  // TODO Auto-generated method stub
+  throw new UnsupportedOperationException("Unimplemented method 'addCommandResponder'");
+ }
+
 }
