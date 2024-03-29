@@ -28,13 +28,11 @@ public class CommunitiyTarget {
  }
 
  public String getAddress() {
-  // TODO Auto-generated method stub
-  throw new UnsupportedOperationException("Unimplemented method 'getAddress'");
+  return null;
  }
 
  public String getPort() {
-  // TODO Auto-generated method stub
-  throw new UnsupportedOperationException("Unimplemented method 'getPort'");
+  return null;
  }
 
 }
