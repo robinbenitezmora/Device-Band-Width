@@ -27,4 +27,14 @@ public class CommunitiyTarget {
   throw new UnsupportedOperationException("Unimplemented method 'setVersion'");
  }
 
+ public String getAddress() {
+  // TODO Auto-generated method stub
+  throw new UnsupportedOperationException("Unimplemented method 'getAddress'");
+ }
+
+ public String getPort() {
+  // TODO Auto-generated method stub
+  throw new UnsupportedOperationException("Unimplemented method 'getPort'");
+ }
+
 }
