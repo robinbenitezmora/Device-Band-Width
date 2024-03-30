@@ -37,4 +37,14 @@ public class PDU {
   throw new UnsupportedOperationException("Unimplemented method 'getVariableBindings'");
  }
 
+ public void setRequestID(Integer integer) {
+  // TODO Auto-generated method stub
+  throw new UnsupportedOperationException("Unimplemented method 'setRequestID'");
+ }
+
+ public void set(int i, VariableBinding vb) {
+  // TODO Auto-generated method stub
+  throw new UnsupportedOperationException("Unimplemented method 'set'");
+ }
+
 }
