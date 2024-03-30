@@ -27,4 +27,12 @@ public class CommunitiyTarget {
   throw new UnsupportedOperationException("Unimplemented method 'setVersion'");
  }
 
+ public String getAddress() {
+  return null;
+ }
+
+ public String getPort() {
+  return null;
+ }
+
 }
