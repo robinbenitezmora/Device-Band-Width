@@ -15,7 +15,7 @@ public class ProjectGetAsyn {
  public static CommunitiyTarget createDefault(String ip, String community) {
   Address targetAddress = GenericAddress.parse(DEFAULT_PROTOCOL + ":" + ip + "/" + DEFAULT_PORT);
   CommunitiyTarget target = new CommunitiyTarget();
-  target.setCommunity(new OctetString());
+  target.setCommunity(new OctetString(community));
   target.setAddress(targetAddress);
   target.setRetries(DEFAULT_RETRIES);
   target.setTimeout(DEFAULT_TIMEOUT);
@@ -23,6 +23,7 @@ public class ProjectGetAsyn {
   return target;
  }
 
+ @SuppressWarnings("unused")
  public static void projectAsyinGetList(String ip, String community, List<String> oidList) {
   CommunitiyTarget target = createDefault(ip, community);
   Project project = null;

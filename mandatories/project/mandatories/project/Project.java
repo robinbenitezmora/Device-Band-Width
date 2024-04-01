@@ -3,33 +3,40 @@ package mandatories.project;
 public class Project {
 
  public void listen() {
-  // TODO Auto-generated method stub
-  throw new UnsupportedOperationException("Unimplemented method 'listen'");
  }
 
  public void cancel(Object request, ResponseListener responseListener) {
-  // TODO Auto-generated method stub
-  throw new UnsupportedOperationException("Unimplemented method 'cancel'");
- }
-
- public ResponseEvent send(PDU pdu, CommunitiyTarget target, Object object, ResponseListener listener) {
-  // TODO Auto-generated method stub
-  throw new UnsupportedOperationException("Unimplemented method 'send'");
  }
 
  public void close() {
-  // TODO Auto-generated method stub
-  throw new UnsupportedOperationException("Unimplemented method 'close'");
  }
 
  public Object getMessageDispatcher() {
-  // TODO Auto-generated method stub
-  throw new UnsupportedOperationException("Unimplemented method 'getMessageDispatcher'");
+  return null;
  }
 
  public void addCommandResponder(ProjectTrapMultiThreadReceiver projectTrapMultiThreadReceiver) {
+ }
+
+ public void addMessageProcessingModel(MPv2c mPv2c) {
+ }
+
+ public void addMessageProcessingModel(MPv1 mPv1) {
+ }
+
+ public void addMessageProcessingModel(MPv3 mPv3) {
+ }
+
+ public void addSecurityModel(USM usm) {
+
+ }
+
+ public void send(PDU pdu, CommunityTarget target, Object object, ResponseListener listener) {
+ }
+
+ public void send(PDU pdu, CommunitiyTarget target, Object object, ResponseListener listener) {
   // TODO Auto-generated method stub
-  throw new UnsupportedOperationException("Unimplemented method 'addCommandResponder'");
+  throw new UnsupportedOperationException("Unimplemented method 'send'");
  }
 
 }

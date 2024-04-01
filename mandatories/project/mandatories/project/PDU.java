@@ -6,6 +6,7 @@ public class PDU {
 
  public static final String GET = null;
  public static final String TRAP = null;
+ protected static int noError;
 
  public void add(VariableBinding variableBinding) {
   // TODO Auto-generated method stub
