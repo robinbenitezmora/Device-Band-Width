@@ -8,10 +8,6 @@ public class Project {
  public void cancel(Object request, ResponseListener responseListener) {
  }
 
- public ResponseEvent send(PDU pdu, CommunitiyTarget target, Object object, ResponseListener listener) {
-  return null;
- }
-
  public void close() {
  }
 
@@ -33,6 +29,9 @@ public class Project {
 
  public void addSecurityModel(USM usm) {
 
+ }
+
+ public void send(PDU pdu, CommunityTarget target, Object object, ResponseListener listener) {
  }
 
 }
