@@ -23,7 +23,7 @@ public class ProjectTrapSendDemo {
   pdu.add(new VariableBinding());
 
   pdu.setType(PDU.TRAP);
-  project.send(pdu, null, target, null);
+  project.send(pdu, target, null, null);
   System.out.println("Sending Trap to (IP:Port)=> " + target.getAddress() + ":" + target.getPort());
  }
 
