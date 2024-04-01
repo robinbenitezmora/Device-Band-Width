@@ -34,4 +34,9 @@ public class Project {
  public void send(PDU pdu, CommunityTarget target, Object object, ResponseListener listener) {
  }
 
+ public void send(PDU pdu, CommunitiyTarget target, Object object, ResponseListener listener) {
+  // TODO Auto-generated method stub
+  throw new UnsupportedOperationException("Unimplemented method 'send'");
+ }
+
 }
