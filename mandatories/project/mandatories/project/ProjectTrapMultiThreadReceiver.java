@@ -6,7 +6,6 @@ import java.util.Vector;
 
 public class ProjectTrapMultiThreadReceiver implements CommandResponder {
  private Project project = null;
- private Address listenAddress;
 
  public ProjectTrapMultiThreadReceiver() {
  }
@@ -14,19 +13,13 @@ public class ProjectTrapMultiThreadReceiver implements CommandResponder {
  private void init() throws UnknownHostException, IOException {
   ThreadPool.create("TrapPool", 2);
   new MultiThreadedMessageDispatcher();
-  UdpAddress udpAddress = (UdpAddress) listenAddress;
-  DefaultTcpTransportMapping transport;
-  if (udpAddress != null) {
-   transport = new DefaultUdpTransportMapping();
-  } else {
-   transport = new DefaultTcpTransportMapping();
-  }
-  project = new Project();
-  project.getMessageDispatcher().addMessageProcessingModel(new MPv1()); // Replace 'project' with 'snmp'
-  project.getMessageDispatcher().addMessageProcessingModel(new MPv2c()); // Replace 'project' with 'snmp'
-  project.getMessageDispatcher().addMessageProcessingModel(new MPv3()); // Replace 'project' with 'snmp'
+  Project project = new Project(); // Change the variable type to Project
+  ((Project) project.getMessageDispatcher()).addMessageProcessingModel(new MPv1()); // Replace 'project' with 'snmp'
+  ((Project) project.getMessageDispatcher()).addMessageProcessingModel(new MPv2c()); // Replace 'project' with 'snmp'
+  ((Project) project.getMessageDispatcher()).addMessageProcessingModel(new MPv3()); // Replace 'project' with 'snmp'
   USM usm = new USM();
-  SecurityModels.getInstance().addSecurityModel(usm);
+  ((Project) project.getMessageDispatcher()).addSecurityModel(usm); // Cast the getMessageDispatcher() method to the
+                                                                    // appropriate type
   project.listen();
  }
 
@@ -41,9 +34,8 @@ public class ProjectTrapMultiThreadReceiver implements CommandResponder {
   }
  }
 
- @SuppressWarnings("unchecked")
  public void processPdu(CommandResponderEvent event) {
-  System.out.println("----> 开始解析ResponderEvent: <----");
+  System.out.println("----> ResponderEvent: <----");
   if (event == null || event.getPDU() == null) {
    System.out.println("[Warn] ResponderEvent or PDU is null");
    return;
