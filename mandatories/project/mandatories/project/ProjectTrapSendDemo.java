@@ -14,13 +14,13 @@ public class ProjectTrapSendDemo {
  public void init() throws IOException {
   System.out.println("Initializing ProjectTrapSendDemo...");
   target = createTarget4Trap("udp:127.0.0.1/162");
-  project = new Project();
+  project = new Project(null, null);
   project.listen();
  }
 
  public void sendPDU() throws IOException {
   PDU pdu = new PDU();
-  pdu.add(new VariableBinding());
+  pdu.add(new VariableBinding(null));
 
   pdu.setType(PDU.TRAP);
   project.send(pdu, target, null, null);
