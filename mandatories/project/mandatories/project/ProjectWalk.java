@@ -24,11 +24,11 @@ public class ProjectWalk {
   Project project = null;
   try {
    transport = new DefaultUdpTransportMapping();
-   project = new Project();
+   project = new Project(null, transport);
    transport.listen();
 
    PDU pdu = new PDU();
-   pdu.add(new VariableBinding());
+   pdu.add(new VariableBinding(null));
 
    boolean finished = false;
    System.out.println("----> Walk to " + ip + " with community " + community + " and target OID " + targetOidd);
