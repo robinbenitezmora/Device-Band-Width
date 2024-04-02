@@ -12,8 +12,8 @@ public class ProjectTrapMultiThreadReceiver implements CommandResponder {
 
  private void init() throws UnknownHostException, IOException {
   ThreadPool.create("TrapPool", 2);
-  new MultiThreadedMessageDispatcher();
-  Project project = new Project(); // Change the variable type to Project
+  new MultiThreadedMessageDispatcher(null, null);
+  Project project = new Project(null, null); // Change the variable type to Project
   ((Project) project.getMessageDispatcher()).addMessageProcessingModel(new MPv1()); // Replace 'project' with 'snmp'
   ((Project) project.getMessageDispatcher()).addMessageProcessingModel(new MPv2c()); // Replace 'project' with 'snmp'
   ((Project) project.getMessageDispatcher()).addMessageProcessingModel(new MPv3()); // Replace 'project' with 'snmp'
