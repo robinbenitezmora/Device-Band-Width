@@ -48,4 +48,9 @@ public class PDU {
   throw new UnsupportedOperationException("Unimplemented method 'set'");
  }
 
+ public String getErrorStatusText() {
+  // TODO Auto-generated method stub
+  throw new UnsupportedOperationException("Unimplemented method 'getErrorStatusText'");
+ }
+
 }
