@@ -13,7 +13,7 @@ public class ProjectGetList {
  public static CommunitiyTarget creatorDefault(String address, String community) {
   Address targetAddress = GenericAddress.parse(DEFAULT_PROTOCOL + ";" + address + "/" + DEFAULT_PORT);
   CommunitiyTarget target = new CommunitiyTarget();
-  target.setCommunity(new OctetString());
+  target.setCommunity(new OctetString(community));
   target.setAddress(targetAddress);
   target.setRetries(DEFAULT_RETRIES);
   target.setTimeout(DEFAULT_TIMEOUT);
@@ -28,12 +28,12 @@ public class ProjectGetList {
 
    for (@SuppressWarnings("unused")
    String oid : oidList) {
-    pdu.add(new VariableBinding());
+    pdu.add(new VariableBinding(null));
    }
 
    DefaultUdpTransportMapping transport = new DefaultUdpTransportMapping();
    transport.listen();
-   project = new Project();
+   project = new Project(null, transport);
 
    System.out.println("--------------------------------------");
    pdu.setType(PDU.GET);

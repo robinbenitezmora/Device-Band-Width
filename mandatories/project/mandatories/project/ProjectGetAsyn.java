@@ -29,12 +29,12 @@ public class ProjectGetAsyn {
   Project project = null;
   try {
    DefaultUdpTransportMapping transport = new DefaultUdpTransportMapping();
-   project = new Project();
+   project = new Project(null, transport);
    project.listen();
 
    PDU pdu = new PDU();
    for (String oid : oidList) {
-    pdu.add(new VariableBinding());
+    pdu.add(new VariableBinding(null));
    }
 
    final CountDownLatch latch = new CountDownLatch(1);

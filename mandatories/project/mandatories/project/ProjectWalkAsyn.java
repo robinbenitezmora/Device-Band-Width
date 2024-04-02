@@ -28,12 +28,12 @@ public class ProjectWalkAsyn {
   try {
    System.out.println("Start to walk...");
 
-   project = new Project();
+   project = new Project(null, null);
    project.listen();
 
    final PDU pdu = new PDU();
    final CountDownLatch latch = new CountDownLatch(1);
-   pdu.add(new VariableBinding());
+   pdu.add(new VariableBinding(null));
 
    ResponseListener listener = new ResponseListener() {
    };
@@ -63,12 +63,12 @@ public class ProjectWalkAsyn {
   try {
    System.out.println("Start to walk...");
 
-   project = new Project();
+   project = new Project(null, null);
    project.listen();
 
    final PDU pdu = new PDU();
    final CountDownLatch latch = new CountDownLatch(1);
-   pdu.add(new VariableBinding());
+   pdu.add(new VariableBinding(null));
 
    ResponseListener listener = new ResponseListener() {
    };

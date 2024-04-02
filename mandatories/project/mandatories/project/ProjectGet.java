@@ -14,7 +14,7 @@ public class ProjectGet {
   String ip = "192.168.0.1"; // Replace with the desired IP address
   Address targetAddress = GenericAddress.parse(DEFAULT_PROTOCOL + ";" + ip + "/" + DEFAULT_PORT);
   CommunitiyTarget target = new CommunitiyTarget();
-  target.setCommunity(new OctetString());
+  target.setCommunity(new OctetString(ip));
   target.setAddress(targetAddress);
   target.setRetries(DEFAULT_RETRIES);
   target.setTimeout(DEFAULT_TIMEOUT);
@@ -29,7 +29,7 @@ public class ProjectGet {
    // ...
 
    PDU pdu = new PDU();
-   pdu.add(new VariableBinding());
+   pdu.add(new VariableBinding(null));
 
    // ...
   } catch (Exception e) {
@@ -68,4 +68,3 @@ public class ProjectGet {
   return response_str;
  }
 }
-// Path: mandatories/project/mandatories/project/ProjectConstants.java

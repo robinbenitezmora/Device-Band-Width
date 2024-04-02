@@ -2,6 +2,10 @@ package mandatories.project;
 
 public class Project {
 
+ public Project(MultiThreadedMessageDispatcher dispatcher, DefaultUdpTransportMapping transport) {
+  // TODO Auto-generated constructor stub
+ }
+
  public void listen() {
  }
 
@@ -37,6 +41,11 @@ public class Project {
  public void send(PDU pdu, CommunitiyTarget target, Object object, ResponseListener listener) {
   // TODO Auto-generated method stub
   throw new UnsupportedOperationException("Unimplemented method 'send'");
+ }
+
+ public void getNext(PDU pdu, CommunityTarget target, Object object, ResponseListener responseListener) {
+  // TODO Auto-generated method stub
+  throw new UnsupportedOperationException("Unimplemented method 'getNext'");
  }
 
 }
