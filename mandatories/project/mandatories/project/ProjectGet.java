@@ -67,4 +67,9 @@ public class ProjectGet {
   }
   return response_str;
  }
+
+ public static String getPDUStringvalue(PDU in_resp_from_get) {
+  // TODO Auto-generated method stub
+  throw new UnsupportedOperationException("Unimplemented method 'getPDUStringvalue'");
+ }
 }
