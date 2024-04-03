@@ -2,13 +2,15 @@ package mandatories.project;
 
 import java.util.Vector;
 
+import mandatories.unused.Record;
+
 public class PDU {
 
  public static final String GET = null;
  public static final String TRAP = null;
  protected static int noError;
 
- public void add(VariableBinding variableBinding) {
+ public void add(Record data) {
   // TODO Auto-generated method stub
   throw new UnsupportedOperationException("Unimplemented method 'add'");
  }
