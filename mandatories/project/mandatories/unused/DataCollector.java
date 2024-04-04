@@ -14,72 +14,7 @@ import javax.swing.text.html.HTMLDocument.Iterator;
 
 import mandatories.project.PDU;
 import mandatories.project.ProjectGet;
-
-public class Record {
-  int index;
-  long inoctects;
-  long outoctets;
-  long speed;
-  Date date;
-  String ip;
-  double in_bw;
-  double out_bw;
-  String port;
-  double data_in_mb;
-  double data_out_mb;
-  double data_datarate_in_mbps;
-  double data_datarate_out_mbps;
-
-  static String oid_inoctets;
-  static String oid_outoctets;
-  static String community = "public";
-  static String oid_IFindexes = "1.3.6.1.2.1.2.2.1.1";
-  static String oid_speed = "1.3.6.1.2.1.2.2.1.5.";
-  static String oid_status = "1.3.6.1.2.1.2.2.1.8.";
-  static String oid_interface_dscr = "1.3.6.1.2.1.2.2.1.2.";
-  static String oid_basic_inoctetes = "1.3.6.1.2.1.2.2.1.10.";
-  static String oid_basic_outoctetes = "1.3.6.1.2.1.2.2.1.16.";
-  static String oid_HCInoctetes = " 1.3.6.1.2.1.31.1.1.1.6.";
-  static String oid_HCOutoctetes = " 1.3.6.1.2.1.31.1.1.1.10.";
-  public static String oid_inoctetes;
-  public static String oid_outoctetes;
-  public static int inoctets;
-
-  Record(String ip, String port, String community) throws IOException {
-    this.ip = ip;
-    this.port = port;
-
-    date = new Date(inoctects);
-
-    String InOctets_oidval = oid_inoctets + port;
-    PDU In_resp_from_get = ProjectGet.projectGet(ip, community, InOctets_oidval);
-    inoctects = ProjectGet.getPDUvalue(In_resp_from_get);
-
-    String OutOctets_oidval = oid_outoctets + port;
-    PDU Out_resp_from_get = ProjectGet.projectGet(ip, community, OutOctets_oidval);
-    outoctets = ProjectGet.getPDUvalue(Out_resp_from_get);
-
-    String IfSpeed_oidval = oid_speed + port;
-    PDU Speed_resp_from_get = ProjectGet.projectGet(ip, community, IfSpeed_oidval);
-    speed = ProjectGet.getPDUvalue(Speed_resp_from_get);
-  }
-
-  Record(Record r) {
-    this.ip = r.ip;
-    this.data_datarate_in_mbps = r.data_datarate_in_mbps;
-    this.data_datarate_out_mbps = r.data_datarate_out_mbps;
-    this.data_in_mb = r.data_in_mb;
-    this.data_out_mb = r.data_out_mb;
-    this.date = r.date;
-    this.in_bw = r.in_bw;
-    this.inoctects = r.inoctects;
-    this.out_bw = r.out_bw;
-    this.outoctets = r.outoctets;
-    this.port = r.port;
-    this.speed = r.speed;
-    this.index = r.index;
-  }
-}
+import path.to.DataProcessor;
 
 public class DataCollector {
 
@@ -224,7 +159,7 @@ public static void clear_copyArrayList(Date last_shown){
     }
   }
 
-  public static void calc_bandwidth(mandatories.project.Record data, int start, int end) {
+  public static void calc_bandwidth(Record[][] tmp_recordings, int start, int end) {
     int i, x, j;
     int loop;
 
@@ -237,29 +172,32 @@ public static void clear_copyArrayList(Date last_shown){
 
       for (j = 0, i = start + 1; j < loop; i++, j++) {
 
-        if (data[p][(i - 1) % size_record_queue] == null) {
+        if (tmp_recordings[((p - 1 + size_record_queue) % size_record_queue)] == null) {
           continue;
         }
 
-        long delta_inoctets = (Record.inoctets - data[p][(i - 1) % size_record_queue].inoctets);
-        long delta_outoctets = (data[p][i % size_record_queue].outoctets
-            - data[p][(i - 1) % size_record_queue].outoctets);
+        long delta_inoctets = (tmp_recordings[p].length
+            - tmp_recordings[((p - 1 + size_record_queue) % size_record_queue)].length);
+        long delta_outoctets = (tmp_recordings[p].length
+            - tmp_recordings[((p - 1 + size_record_queue) % size_record_queue)].length);
 
-        long ifspeed = data[p][i % size_record_queue].speed;
-        long time_difference = (data[p][i % size_record_queue].date.getTime()
-            - data[p][(i - 1) % size_record_queue].date.getTime());
+        long ifspeed = tmp_recordings[p].length;
+        long time_difference = (tmp_recordings[p].length
+            - tmp_recordings[((p - 1 + size_record_queue) % size_record_queue)].length);
         long delta_seconds = TimeUnit.MILLISECONDS.toSeconds(time_difference);
 
         if (delta_seconds < update_freq) {
           delta_seconds = update_freq;
         }
 
-        data[p][i % size_record_queue].data_in_mb = ((double) delta_inoctets) / (1024 * 1024);
-        data[p][i % size_record_queue].data_out_mb = ((double) delta_outoctets) / (1024 * 1024);
-        data[p][i % size_record_queue].data_datarate_in_mbps = (data[p][i % size_record_queue].data_in_mb
-            / (double) delta_seconds) * 8;
-        data[p][i % size_record_queue].data_datarate_out_mbps = (data[p][i % size_record_queue].data_out_mb
-            / (double) delta_seconds) * 8;
+        tmp_recordings[p][i % size_record_queue].data_in_mb = ((double) delta_inoctets) / (1024 * 1024);
+        tmp_recordings[p][i % size_record_queue].data_out_mb = ((double) delta_outoctets) / (1024 * 1024);
+        tmp_recordings[p][i
+            % size_record_queue].data_datarate_in_mbps = (tmp_recordings[p][i % size_record_queue].data_in_mb
+                / (double) delta_seconds) * 8;
+        tmp_recordings[p][i
+            % size_record_queue].data_datarate_out_mbps = (tmp_recordings[p][i % size_record_queue].data_out_mb
+                / (double) delta_seconds) * 8;
 
         double in_num = (double) delta_inoctets * 8 * 100;
         double in_denom = (double) delta_seconds * ifspeed;
@@ -272,12 +210,12 @@ public static void clear_copyArrayList(Date last_shown){
         inbw = Math.floor(inbw * 100000) / 100000;
         outbw = Math.floor(outbw * 100000) / 100000;
 
-        data[p][i % size_record_queue].in_bw = inbw;
-        data[p][i % size_record_queue].out_bw = outbw;
+        tmp_recordings[p][i % size_record_queue].in_bw = inbw;
+        tmp_recordings[p][i % size_record_queue].out_bw = outbw;
 
         if (delta_inoctets >= 0 && delta_outoctets >= 0) {
           PDU data_collected;
-          data_collected.add(data[p][i % size_record_queue]);
+          data_collected.add(tmp_recordings[p][i % size_record_queue]);
         }
 
         current_inbw = inbw;
@@ -414,6 +352,7 @@ public static void clear_copyArrayList(Date last_shown){
     long prevInoctets = 0;
     long prevOutoctets = 0;
 
+    @SuppressWarnings("unchecked")
     public void run() {
       Object gui_javafx;
       try {
@@ -434,7 +373,7 @@ public static void clear_copyArrayList(Date last_shown){
         }
 
         if (!pause) {
-          record[][] tmp_recordings;
+          Record[][] tmp_recordings;
           try {
             Iterator<Integer> iter = used_slots_list.iterator();
             while (iter.hasNext()) {
@@ -443,19 +382,18 @@ public static void clear_copyArrayList(Date last_shown){
                   mapping_table[i][2]);
             }
           } catch (Exception ex) {
-            gui_javafx.pst.println(
+            System.out.println(
                 "Error in creating temporary records array Datacollector.repeatfunction() at time:" + time_sec);
-            ex.printStackTrace(gui_javafx.pst);
+            ex.printStackTrace(System.out);
           }
 
           try {
-            System.out.println("time:" + time_sec);
-            tmp_index++;
-            endindex++;
-            endindex = endindex % size_record_queue;
+            System.out.println("Error in modifying indexes for circular array Datacollector.repeatfunction()");
+            Throwable ex;
+            ex.printStackTrace(System.out);
           } catch (Exception ex) {
-            gui_javafx.pst.println("Error in modifying indexes for circular array Datacollector.repeatfunction()");
-            ex.printStackTrace(gui_javafx.pst);
+            System.out.println("Error in modifying indexes for circular array Datacollector.repeatfunction()");
+            ex.printStackTrace(System.out);
           }
 
           try {
@@ -465,23 +403,23 @@ public static void clear_copyArrayList(Date last_shown){
               copyArrayList();
             }
           } catch (Exception ex) {
-            gui_javafx.pst.println("Error in calc_bandwidth  Datacollector.repeatfunction()");
-            ex.printStackTrace(gui_javafx.pst);
-
+            System.out.println("Error in calc_bandwidth  Datacollector.repeatfunction()");
+            ex.printStackTrace(System.out);
           }
         }
         if (time_sec % (update_freq * calc_freq * data_store_freq) == 0 && time_sec != 0) {
 
           try {
             Object data_processor;
-            ArrayList<Integer> data_collected;
-            data_processor.show_raw_data(data_collected);
+            DataProcessor dataProcessor = (DataProcessor) data_processor;
+            Object data_collected;
+            dataProcessor.show_raw_data(data_collected);
 
             try {
-              data_processor.prepare_data(data_collected);
+              dataProcessor.prepare_data(data_collected);
             } catch (Exception ex) {
-              gui_javafx.pst.println("Error in preparing data for database Datacollector.repeatfunction()");
-              ex.printStackTrace(gui_javafx.pst);
+              System.out.println("Error in preparing data for database Datacollector.repeatfunction()");
+              ex.printStackTrace(System.out);
             }
 
             try {
@@ -489,13 +427,13 @@ public static void clear_copyArrayList(Date last_shown){
               try {
                 data = ((DataProcessor) data_processor).get_database_data();
               } catch (Exception ex) {
-                gui_javafx.pst.println("Error in preparing data for database Datacollector.repeatfunction()");
-                ex.printStackTrace(gui_javafx.pst);
+                System.out.println("Error in preparing data for database Datacollector.repeatfunction()");
+                ex.printStackTrace(System.out);
               }
-              ((Object) data_processor).show_processed_data();
+              ((DataProcessor) data_processor).show_processed_data();
             } catch (Exception ex) {
-              gui_javafx.pst.println("Error in sending data to database Datacollector.repeatfunction()");
-              ex.printStackTrace(gui_javafx.pst);
+              System.out.println("Error in sending data to database Datacollector.repeatfunction()");
+              ex.printStackTrace(System.out);
             }
 
             try {
@@ -503,18 +441,18 @@ public static void clear_copyArrayList(Date last_shown){
               if (data == null) {
                 System.out.println("NO DATA ( NULL )TO BE INSERTED IN DATABASE");
               } else {
-                Object database;
-                ((Object) database).insert_data(data);
+                Database database = (Database) database;
+                database.insert_data(data);
               }
             } catch (Exception ex) {
-              gui_javafx.pst.println(
+              System.out.println(
                   "Error in inserting data to database Database.insert_data() in Datacollector.repeatfunction()");
-              ex.printStackTrace(gui_javafx.pst);
+              ex.printStackTrace(System.out);
             }
-            data_collected.clear();
+            ((ArrayList<Integer>) data_collected).clear();
           } catch (Exception ex) {
-            gui_javafx.pst.println("Error in sending data to database Datacollector.repeatfunction()");
-            ex.printStackTrace(gui_javafx.pst);
+            System.out.println("Error in sending data to database Datacollector.repeatfunction()");
+            ex.printStackTrace(System.out);
           }
         }
         time_sec += update_freq;
@@ -523,8 +461,8 @@ public static void clear_copyArrayList(Date last_shown){
         }
 
       } catch (Exception ex) {
-        gui_javafx.pst.println("Error in Data collecting and processing Datacollector.repeatfunction()");
-        ex.printStackTrace(gui_javafx.pst);
+        System.out.println("Error in Data collecting and processing Datacollector.repeatfunction()");
+        ex.printStackTrace(System.out);
       }
     }
   }
